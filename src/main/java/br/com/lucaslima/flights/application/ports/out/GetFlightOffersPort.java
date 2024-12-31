@@ -1,25 +1,26 @@
-package br.com.lucaslima.flights.application.ports.in;
+package br.com.lucaslima.flights.application.ports.out;
 
 import br.com.lucaslima.flights.application.domain.FlightOffer;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 
-public interface GetFlightOffersUseCase {
+public interface GetFlightOffersPort {
 
     List<FlightOffer> search(
             String iataCodeDeparture,
             String iataCodeArrival,
-            boolean nonStop,
-            int daysToDeparture,
             ZonedDateTime departureDate,
-            int precision);
+            int adults,
+            boolean nonStop,
+            String currencyCode);
 
     List<FlightOffer> search(
             String iataCodeDeparture,
             String iataCodeArrival,
-            boolean nonStop,
             ZonedDateTime departureDate,
-            ZonedDateTime arrivalDate);
-
+            ZonedDateTime returnDate,
+            int adults,
+            boolean nonStop,
+            String currencyCode);
 }
