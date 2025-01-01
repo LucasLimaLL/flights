@@ -1,13 +1,13 @@
 package br.com.lucaslima.flights.application.domain;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 public class Departure {
 
     private final String iataCode;
-    private final Instant date;
+    private final ZonedDateTime date;
 
-    public Departure(String iataCode, Instant date) {
+    public Departure(String iataCode, ZonedDateTime date) {
         this.iataCode = iataCode;
         this.date = date;
     }
@@ -16,7 +16,7 @@ public class Departure {
         return iataCode;
     }
 
-    public Instant getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 }

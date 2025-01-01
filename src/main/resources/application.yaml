@@ -1,2 +1,16 @@
 server:
   port: 8090
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+http:
+  amadeus:
+    auth:
+      url: https://test.api.amadeus.com/v1/security/oauth2/token
+      client_id: ${AMADEUS_CLIENT_ID}
+      client_secret: ${AMADEUS_CLIENT_SECRET}
+      grant_type: client_credentials
+    flights:
+      url: https://test.api.amadeus.com

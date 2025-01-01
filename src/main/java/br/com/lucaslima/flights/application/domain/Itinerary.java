@@ -8,10 +8,10 @@ public class Itinerary {
     private final Arrival arrival;
     private final Duration duration;
 
-    public Itinerary(Departure departure, Arrival arrival, Duration duration) {
+    public Itinerary(Departure departure, Arrival arrival) {
         this.departure = departure;
         this.arrival = arrival;
-        this.duration = duration;
+        this.duration = departure == null || arrival == null ? Duration.ZERO : Duration.between(arrival.getDate(), departure.getDate());
     }
 
     public Departure getDeparture() {

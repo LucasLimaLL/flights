@@ -11,14 +11,6 @@ public interface GetFlightOffersPort {
             String iataCodeDeparture,
             String iataCodeArrival,
             ZonedDateTime departureDate,
-            int adults,
-            boolean nonStop,
-            String currencyCode);
-
-    List<FlightOffer> search(
-            String iataCodeDeparture,
-            String iataCodeArrival,
-            ZonedDateTime departureDate,
             ZonedDateTime returnDate,
             int adults,
             boolean nonStop,

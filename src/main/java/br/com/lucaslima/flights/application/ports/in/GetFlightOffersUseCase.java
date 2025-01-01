@@ -12,7 +12,7 @@ public interface GetFlightOffersUseCase {
             String iataCodeArrival,
             boolean nonStop,
             int daysToDeparture,
-            ZonedDateTime departureDate,
+            ZonedDateTime desiredDate,
             int precision);
 
     List<FlightOffer> search(

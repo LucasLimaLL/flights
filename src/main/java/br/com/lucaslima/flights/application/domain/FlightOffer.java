@@ -5,22 +5,22 @@ import java.util.List;
 
 public class FlightOffer {
 
-    private final List<Itinerary> itinararies;
+    private final List<Itinerary> itineraries;
     private final Price price;
     private final Duration duration;
     private final Departure firstDeparture;
     private final Arrival lastArrival;
 
-    public FlightOffer(List<Itinerary> itinararies, Price price, Duration duration, Departure firstDeparture, Arrival lastArrival) {
-        this.itinararies = itinararies;
+    public FlightOffer(List<Itinerary> itineraries, Price price, Departure firstDeparture, Arrival lastArrival) {
+        this.itineraries = itineraries;
         this.price = price;
-        this.duration = duration;
         this.firstDeparture = firstDeparture;
         this.lastArrival = lastArrival;
+        this.duration = firstDeparture == null || lastArrival == null ? Duration.ZERO : Duration.between(lastArrival.getDate(), firstDeparture.getDate());
     }
 
-    public List<Itinerary> getItinararies() {
-        return itinararies;
+    public List<Itinerary> getItineraries() {
+        return itineraries;
     }
 
     public Price getPrice() {
