@@ -2,6 +2,7 @@ package br.com.lucaslima.flights.adapters.web.out.amadeus.flights.feign;
 
 import br.com.lucaslima.flights.adapters.web.out.amadeus.flights.dto.AmadeusFlightOffersResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface GetFlightOffersClient {
 
     @GetMapping(path = "/v2/shopping/flight-offers")
-    AmadeusFlightOffersResponse getFlightOffers(
+    ResponseEntity<AmadeusFlightOffersResponse> getFlightOffers(
             @RequestParam("originLocationCode") String originLocationCode,
             @RequestParam("destinationLocationCode") String destinationLocationCode,
             @RequestParam("departureDate") String departureDate,
