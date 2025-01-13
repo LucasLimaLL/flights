@@ -16,7 +16,7 @@ public class FlightOffer {
         this.price = price;
         this.firstDeparture = firstDeparture;
         this.lastArrival = lastArrival;
-        this.duration = firstDeparture == null || lastArrival == null ? Duration.ZERO : Duration.between(lastArrival.getDate(), firstDeparture.getDate());
+        this.duration = firstDeparture == null || lastArrival == null ? Duration.ZERO : Duration.between(firstDeparture.getDate(), lastArrival.getDate());
     }
 
     public List<Itinerary> getItineraries() {
