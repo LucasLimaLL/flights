@@ -1,10 +1,13 @@
 package br.com.lucaslima.flights.adapters.web.out.amadeus.auth;
 
+import br.com.lucaslima.flights.adapters.web.out.amadeus.auth.dto.AuthAmadeusRequest;
 import br.com.lucaslima.flights.adapters.web.out.amadeus.auth.feign.AuthAmadeusFeignClient;
 import br.com.lucaslima.flights.adapters.web.out.amadeus.auth.properties.AuthProperties;
 import br.com.lucaslima.flights.adapters.web.out.auth.AuthPort;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 @EnableConfigurationProperties(AuthProperties.class)
@@ -22,12 +25,15 @@ public class AuthAmadeusWebAdapter implements AuthPort {
     @Override
     public String getAccessToken() {
 
-        var response = authAmadeusFeignClient.token(
-                authProperties.getClientId(),
-                authProperties.getClientSecret(),
-                authProperties.getGrantType()
-        );
+        var request = AuthAmadeusRequest
+                .builder()
+                .clientId(authProperties.getClientId())
+                .clientSecret(authProperties.getClientSecret())
+                .grantType(authProperties.getGrantType())
+                .build();
 
-        return response.getBody().accessToken();
+        var response = authAmadeusFeignClient.token(request);
+
+        return Objects.requireNonNull(response.getBody()).accessToken();
     }
 }
