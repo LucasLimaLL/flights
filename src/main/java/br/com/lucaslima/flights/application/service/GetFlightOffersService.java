@@ -6,6 +6,7 @@ import br.com.lucaslima.flights.application.ports.out.GetFlightOffersPort;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -47,7 +48,7 @@ public class GetFlightOffersService implements GetFlightOffersUseCase {
                                     boolean nonStop,
                                     ZonedDateTime departureDate,
                                     ZonedDateTime arrivalDate) {
-        return getFlightOffersPort
+        var offers = getFlightOffersPort
                 .search(iataCodeDeparture,
                         iataCodeArrival,
                         departureDate,
@@ -55,6 +56,8 @@ public class GetFlightOffersService implements GetFlightOffersUseCase {
                         1,
                         nonStop,
                         currencyCode);
+
+        return offers == null ? Collections.emptyList() : offers;
     }
 
     private static List<ZonedDateTime> getSurroundingDays(ZonedDateTime date, int days) {
