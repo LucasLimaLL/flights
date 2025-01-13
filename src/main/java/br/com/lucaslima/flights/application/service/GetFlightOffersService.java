@@ -7,20 +7,16 @@ import br.com.lucaslima.flights.application.ports.out.GetFlightOffersPort;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class GetFlightOffersService implements GetFlightOffersUseCase {
 
     private final GetFlightOffersPort getFlightOffersPort;
     private final String currencyCode;
-    private final ExecutorService executorService;
 
     public GetFlightOffersService(GetFlightOffersPort getFlightOffersPort) {
         this.getFlightOffersPort = getFlightOffersPort;
         this.currencyCode = "BRL";
-        this.executorService = Executors.newVirtualThreadPerTaskExecutor();
     }
 
     @Override
@@ -38,15 +34,7 @@ public class GetFlightOffersService implements GetFlightOffersUseCase {
         for (ZonedDateTime departureDate : surroundingDepartureDays) {
             var surroundingArrivalDays = getSurroundingDays(departureDate.plusDays(daysToDeparture), precision);
             for (ZonedDateTime arrivalDate : surroundingArrivalDays) {
-                futures.add(executorService.submit(() -> getFlightOffers(iataCodeDeparture, iataCodeArrival, nonStop, departureDate, arrivalDate, flightsOffers)));
-            }
-        }
-
-        for (Future<?> future : futures) {
-            try {
-                future.get();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                getFlightOffers(iataCodeDeparture, iataCodeArrival, nonStop, departureDate, arrivalDate, flightsOffers);
             }
         }
 
@@ -89,9 +77,7 @@ public class GetFlightOffersService implements GetFlightOffersUseCase {
                 arrivalDate);
 
         if (searchOffers != null && !searchOffers.isEmpty()) {
-            synchronized (flightsOffers) {
-                flightsOffers.addAll(searchOffers);
-            }
+            flightsOffers.addAll(searchOffers);
         }
     }
 }
