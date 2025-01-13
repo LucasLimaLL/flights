@@ -16,7 +16,6 @@ public record DataAmadeusFlightOffersResponse(
         List<ItineraryDataAmadeusFlightOffersResponse> itineraries,
         PriceDataAmadeusFlightOffersResponse price,
         PricingOptionsDataAmadeusFlightOffersResponse pricingOptions,
-        List<String> validatingAirlineCodes,
-        TravelerPricingsDataAmadeusFlightOffersResponse travelerPricings
+        List<String> validatingAirlineCodes
 ) {
 }

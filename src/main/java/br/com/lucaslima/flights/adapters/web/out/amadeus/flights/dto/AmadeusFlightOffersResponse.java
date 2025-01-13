@@ -4,5 +4,6 @@ import java.util.List;
 
 public record AmadeusFlightOffersResponse(
         MetaAmadeusFlightOffersResponse meta,
-        List<DataAmadeusFlightOffersResponse> data) {
+        List<DataAmadeusFlightOffersResponse> data,
+        DictionaryAmadeusFlightOffersResponse dictionaries) {
 }
